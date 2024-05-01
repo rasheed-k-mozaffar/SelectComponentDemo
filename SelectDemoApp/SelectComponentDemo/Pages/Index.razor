@@ -1,0 +1,41 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<ul>
+    @foreach (var fruit in fruits)
+    {
+        <li @onclick="(() => OnFruitClicked(fruit))"
+            style="font-size: 20px; cursor: pointer"
+            class="p-2 mb-2 @(selectedFruits.Contains(fruit) ? "bg-success" : null)">
+            @fruit
+        </li>
+    }
+</ul>
+
+
+@code {
+    private List<string> fruits = new List<string>()
+    {
+        "Strawberries \ud83c\udf53",
+        "Apples \ud83c\udf4f",
+        "Bananas \ud83c\udf4c",
+        "Melons \ud83c\udf48",
+        "Oranges \ud83c\udf4a",
+        "Pears \ud83c\udf50",
+        "Cherries \ud83c\udf52",
+        "Avocados \ud83e\udd51"
+    };
+
+    private HashSet<string> selectedFruits = new HashSet<string>();
+
+    private void OnFruitClicked(string fruit)
+    {
+        if (!selectedFruits.Add(fruit))
+        {
+            selectedFruits.Remove(fruit);
+        }
+    }
+}
